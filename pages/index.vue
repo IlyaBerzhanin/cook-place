@@ -1,3 +1,3 @@
 <template lang="pug">
-p some new text
+h1 home page
 </template>
