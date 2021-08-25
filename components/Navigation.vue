@@ -28,6 +28,7 @@ export default {
                 {title: 'recipes', route: 'recipes', iconName: 'mdi-format-list-checkbox'},
                 {title: 'favorite', route: 'favorite', iconName: 'mdi-heart-outline'},
                 {title: 'chat', route: 'chat', iconName: 'mdi-chat-outline'},
+                {title: 'community', route: 'community', iconName: 'mdi-account-group-outline'},
                 {title: 'settings', route: 'settings', iconName: 'mdi-cog-outline'}
             ]
        }
@@ -44,6 +45,7 @@ export default {
 }
 
 .nuxt-link-exact-active {
-    background-color: greenyellow
+    background-color: greenyellow;
+    transition: .5s ease;
 }
 </style>
