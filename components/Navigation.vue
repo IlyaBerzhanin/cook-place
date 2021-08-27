@@ -1,22 +1,23 @@
 <template lang="pug">
-    v-navigation-drawer(
-        class="deep-purple accent-2"
-        dark
-        permanent
-    )
-        v-list.nav-links
-            NuxtLink(
-                v-for="tab in tabsData"
-                :key="tab.title"
-                :to="{name: tab.route}"
-                class="link-anchor"
-            )
-                v-list-item(
-                    link
-                    class="nav-link")
-                    v-list-item-icon
-                        v-icon(dark left) {{ tab.iconName }}
-                    v-list-item-content {{ tab.title }}
+    v-list.nav-links
+        NuxtLink(
+            v-for="tab in tabsData"
+            :key="tab.title"
+            :to="{name: tab.route}"
+            class="link-anchor"
+        )
+            v-list-item(
+                link
+                class="nav-link"
+                )
+                v-list-item-icon
+                    v-icon(
+                        class="v-icon"
+                        left
+                        ) {{ tab.iconName }}
+                v-list-item-content(
+                class="v-list-item-content"
+                ) {{ tab.title }}
 </template>
 
 <script>
@@ -37,15 +38,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav-links {
+    width: 100%;
+}
+
 .link-anchor {
     display: block;
     text-decoration: none;
     text-transform: capitalize;
     font-size: 1rem;
+    transition: .5s ease;
 }
 
-.nuxt-link-exact-active {
-    background-color: greenyellow;
-    transition: .5s ease;
+.v-icon, .v-list-item-content{
+    color: $nav-color;
+    transition: color .5s;
+}
+
+.nuxt-link-exact-active {    
+    & .v-icon, .v-list-item-content{
+       color: $nav-active-color;
+    }
 }
 </style>
