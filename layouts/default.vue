@@ -4,9 +4,10 @@ v-app
     v-col(cols="2")
       NavSidebar
     v-col(cols="7")
-      main
-      h2 this is main content block
-      Nuxt
+      main.main-content
+        Search.search
+        AddBlock.add-block
+        Nuxt
     v-col(cols="3")
       InfoSideBar
 </template>
@@ -16,3 +17,19 @@ export default {
   
 }
 </script>
+
+<style lang="scss" scoped>
+.main-content {
+  background-color: $main-bg-color;
+  height: 100%;
+  @include flex(column, flex-start, center);
+}
+
+.search {
+  margin-top: 30px;
+}
+
+.add-block {
+  margin-top: 30px;
+}
+</style>
