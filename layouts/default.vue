@@ -10,12 +10,28 @@ v-app
         Nuxt
     v-col(cols="3")
       InfoSideBar
+      ul
+        li(v-for="user in users" :key="user.id") {{user}}
 </template>
 
 <script>
 export default {
-  
-}
+  data() {
+    return {
+      users: null
+    };
+  },
+  async fetch() {
+    console.log('infooooo----', );
+    try {
+      this.users = await this.$axios.$get("/api/users/index");
+      console.log(this.users);
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
