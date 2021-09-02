@@ -37,11 +37,13 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    '~/modules/setup-db.js',
+  ],
   styleResources: {
-      scss: [
-          '@/assets/_main.scss',
-      ]
+    scss: ['@/assets/_main.scss'],
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -65,4 +67,19 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  serverMiddleware: [
+    { path: '/api', handler: require('body-parser').json() },
+    {
+      path: '/api',
+      handler: (req, res, next) => {
+        const url = require('url')
+         // eslint-disable-next-line node/no-deprecated-api
+         req.query = url.parse(req.url).query
+        req.params = { ...req.query, ...req.body }
+        next()
+      },
+    },
+    { path: '/api', handler: '~/serverMiddleware/api-server.js' },
+  ],
 }
