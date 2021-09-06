@@ -74,8 +74,8 @@ export default {
       path: '/api',
       handler: (req, res, next) => {
         const url = require('url')
-         // eslint-disable-next-line node/no-deprecated-api
-         req.query = url.parse(req.url).query
+        // eslint-disable-next-line node/no-deprecated-api
+        req.query = url.parse(req.url).query
         req.params = { ...req.query, ...req.body }
         next()
       },
