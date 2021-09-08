@@ -21,7 +21,7 @@ export default {
   css: ['@/assets/_main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/route'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -39,12 +39,37 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/style-resources',
     '~/modules/setup-db.js',
   ],
+
   styleResources: {
     scss: ['@/assets/_main.scss'],
   },
+
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       token: {
+  //         property: 'token',
+  //         global: true,
+  //         // required: true,
+  //         // type: 'Bearer'
+  //       },
+  //       user: {
+  //         property: 'user',
+  //         autoFetch: false,
+  //       },
+  //       endpoints: {
+  //         login: { url: '/api/auth/login', method: 'post' },
+  //         logout: { url: '/api/auth/logout', method: 'post' },
+  //         user: { url: '/api/auth/user', method: 'get' },
+  //         register: { url: '/api/auth/register', method: 'get' },
+  //       },
+  //     },
+  //   },
+  // },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

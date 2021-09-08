@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize')
+const syncModels = {}
 
 export default function () {
   this.nuxt.hook('listen', (server, port) => {
@@ -13,31 +14,17 @@ async function setupDb() {
   await sequelize.authenticate()
   console.log('Connection has been established successfully.')
   console.log('auth finished')
-
-  const User = sequelize.define(
-    'User',
-    {
-      // Model attributes are defined here
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        // allowNull defaults to true
-      },
-    },
-    {
-      // Other model options go here
-    }
-  )
-
- await User.sync()
+  const User = require('../models/User')(sequelize, DataTypes)
+  await User.sync({ force: true })
+  syncModels.user = User
   // const jane = await User.create({ firstName: 'JAck', lastName: 'Snow' })
   // console.log("Jane's auto-generated ID:", jane.id)
-//    const users = await sync.findAll()
-//   console.log('All users:', JSON.stringify(users, null, 2))
-    console.log(
-      '==========================================================================================---+++', 
-    )
+  //    const users = await sync.findAll()
+  //   console.log('All users:', JSON.stringify(users, null, 2))
+  console.log(
+    '===================================================================---+++',
+    sequelize.models
+  )
 }
+
+module.exports.syncModels = syncModels

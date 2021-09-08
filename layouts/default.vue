@@ -22,10 +22,8 @@ export default {
     };
   },
   async fetch() {
-    console.log('infooooo----', );
     try {
       this.users = await this.$axios.$get("/api/users/index");
-      console.log(this.users);
     } catch (e) {
       console.error(e);
       throw e;

@@ -1,4 +1,5 @@
 <template lang="pug">
+  .login-block
     v-form(
       v-model="valid"
       class="form"
@@ -29,30 +30,58 @@
             btn-name="log in"
             :disabled="!valid"
         )
+    v-snackbar(
+      transition="slide-x-transition"
+      :value="justRegistered"
+      color="success"
+      timeout="5000"
+      absolute
+      top
+      right
+    ) You've been successfully registered!
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
-export default {  
+export default {
   layout: 'empty',
   data() {
     return {
       showPass: false,
       valid: false,
+      justRegistered: false,
       name: '',
       password: '',
       rules: {
-        required: value => !!value || 'Required',
-        max: value => (value && value.length < 30) || 'max 30 characters',
-        passMin: value => (value && value.length >= 6) || 'min 6 characters'
-      }
+        required: (value) => !!value || 'Required',
+        max: (value) => (value && value.length < 30) || 'max 30 characters',
+        passMin: (value) => (value && value.length >= 6) || 'min 6 characters',
+      },
+    }
+  },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  mounted() {
+    console.log('this usserrr', this.user)
+    if (this.$route.params.justRegistered) {
+      this.justRegistered = this.$route.params.justRegistered
     }
   },
   methods: {
     submitHandler() {
-    this.$refs.form.reset()
-    }
-  }
+      const IS_LOGGED = this.$store.dispatch('loginUser', {
+        name: this.name,
+        password: this.password,
+      })
+      if (IS_LOGGED) {
+        this.$router.push({ name: 'index' })
+      } else {
+        console.log('smth went wrong')
+      }
+    },
+  },
 }
 </script>
 
