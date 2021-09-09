@@ -21,7 +21,10 @@ export default {
   css: ['@/assets/_main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/route'],
+  plugins: [
+    { src: '~/plugins/route', ssr: true },
+    { src: '~/plugins/persistedstate', ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -33,7 +36,7 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    ['@nuxtjs/vuetify', { ssr: false }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

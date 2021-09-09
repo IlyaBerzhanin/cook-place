@@ -32,20 +32,24 @@ export const actions = {
   },
 
   async registerUser({ commit }, userData) {
-    const USER = await this.$axios.$post('/api/auth/register', userData)
-    commit('SET_USER', USER)
+    const SUCCESS = await this.$axios.$post('/api/auth/register', userData)
+    if (!SUCCESS) return false
+    return true
   },
 
-  loginUser({ commit, state }, userData) {
-    let isDataValid = false
-    if (
-      state.user.data.name === userData.name &&
-      state.user.data.password === userData.password
-    ) {
-        isDataValid = true
-        commit('AUTH_USER', isDataValid)
-        return isDataValid
-      }
-      return isDataValid
+  async loginUser({ commit, state }, userData) {
+    const USER = await this.$axios.$post('/api/auth/login', userData)
+
+    if (USER) {
+      commit('AUTH_USER', true)
+      commit('SET_USER', USER)
+      return true
+    }
+
+    return false
+  },
+
+  logoutUser({ commit }) {
+    commit('AUTH_USER', false)
   },
 }
