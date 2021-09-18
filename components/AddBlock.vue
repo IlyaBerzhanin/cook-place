@@ -3,9 +3,13 @@
         .text-content
             h1 Add your own recipe now
             p Upload your own home-made recipe and share it with other members of our community
-        PrimaryButton(
-            :buttonTitle="buttonTitle"
-        )
+        NuxtLink(
+            to="add"
+            class="add-link"
+            )
+            PrimaryButton(
+                :buttonTitle="buttonTitle"
+            )
 </template>
 
 <script>
@@ -26,5 +30,9 @@ export default {
     padding: 20px;
     color: $action-block-font-color;
     @include flex(row, space-between);
+}
+
+.add-link {
+    text-decoration: none;
 }
 </style>

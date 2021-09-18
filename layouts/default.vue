@@ -6,7 +6,10 @@ v-app
     v-col(cols="7")
       main.main-content
         Search.search
-        AddBlock.add-block
+        AddBlock(   
+          v-if="$route.name === 'index'"
+          class="add-block"
+        )
         Nuxt
     v-col(cols="3")
       InfoSideBar
@@ -16,7 +19,7 @@ v-app
 export default {
   data() {
     return {
-
+      
     };
   },
 };

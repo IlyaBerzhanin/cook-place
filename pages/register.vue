@@ -2,7 +2,6 @@
   v-form(
       class="form"
       v-model="valid"
-      ref="form"
       @submit.prevent="submitHandler"
   )
     v-text-field(

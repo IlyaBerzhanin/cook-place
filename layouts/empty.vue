@@ -1,6 +1,7 @@
 <template lang="pug">
 v-app
-    .content
+    ClientOnly
+      .content
         Nuxt
 </template>
 
